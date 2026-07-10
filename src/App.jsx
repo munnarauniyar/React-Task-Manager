@@ -11,7 +11,11 @@ function App() {
 
     setTasks([
       ...tasks,
-      input
+      {
+        text: input,
+        completed: false
+      }
+
     ])
     setInput("");
   }
@@ -29,16 +33,28 @@ function App() {
       <button onClick={AddTask}>Add Task</button>
       <ul>
         {tasks.map((task, index) => (
-          <>
-            <li key={index}>
-              {task}
-              <button onClick={
-                () => setTasks(tasks.filter((item, i) => i !== index))
-              }>Delete</button>
-            </li>
-          </>
+          <li key={index}>
+            {task.text}
+            <button onClick={
+              () => setTasks(tasks.filter((item, i) => i !== index))
+            }>Delete</button>
+
+
+            <button onClick={() =>
+              setTasks(tasks.map((task, i) => {
+                if (i == index) {
+                  return {
+                    ...task,
+                    completed: !task.completed
+                  }
+                }
+                return task;
+              }
+              ))
+            }>Complete</button>
+          </li>
         ))}
-      </ul>
+      </ul >
     </>
 
   )
