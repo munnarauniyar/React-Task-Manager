@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import "./App.css";
+
 function App() {
 
   const [input, setInput] = useState("");
@@ -34,7 +36,10 @@ function App() {
       <ul>
         {tasks.map((task, index) => (
           <li key={index}>
-            {task.text}
+            <span className={task.completed ? "completed" : ""}>
+              {task.text}
+            </span>
+
             <button onClick={
               () => setTasks(tasks.filter((item, i) => i !== index))
             }>Delete</button>
@@ -42,7 +47,7 @@ function App() {
 
             <button onClick={() =>
               setTasks(tasks.map((task, i) => {
-                if (i == index) {
+                if (i === index) {
                   return {
                     ...task,
                     completed: !task.completed
@@ -51,7 +56,9 @@ function App() {
                 return task;
               }
               ))
-            }>Complete</button>
+            }>
+              {task.completed ? "completed" : "complete"}
+            </button>
           </li>
         ))}
       </ul >
