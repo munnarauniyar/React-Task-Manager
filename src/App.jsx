@@ -60,35 +60,51 @@ function App() {
 
       </div>
 
-      <ul>
-        {tasks.map((task, index) => (
-          <li key={index}>
-            <span className={task.completed ? "completed" : ""}>
-              {task.text}
-            </span>
+      {tasks.length === 0
 
-            <button onClick={
-              () => setTasks(tasks.filter((item, i) => i !== index))
-            }>Delete</button>
+        ?
+
+        <div>
+          <p>📭 No tasks yet.</p>
+          <p>Add your first task!</p>
+        </div>
+
+        :
+        <ul>
+          {tasks.map((task, index) => (
+            <li key={index}>
+              <span className={task.completed ? "completed" : ""}>
+                {task.text}
+              </span>
+
+              <button onClick={
+                () => setTasks(tasks.filter((item, i) => i !== index))
+              }>Delete</button>
 
 
-            <button onClick={() =>
-              setTasks(tasks.map((task, i) => {
-                if (i === index) {
-                  return {
-                    ...task,
-                    completed: !task.completed
+              <button onClick={() =>
+                setTasks(tasks.map((task, i) => {
+                  if (i === index) {
+                    return {
+                      ...task,
+                      completed: !task.completed
+                    }
                   }
+                  return task;
                 }
-                return task;
-              }
-              ))
-            }>
-              {task.completed ? "completed" : "complete"}
-            </button>
-          </li>
-        ))}
-      </ul >
+                ))
+              }>
+                {task.completed ? "completed" : "complete"}
+              </button>
+            </li>
+          ))}
+        </ul >
+
+
+
+      }
+
+
     </div>
 
   )
