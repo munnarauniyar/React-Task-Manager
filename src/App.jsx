@@ -35,6 +35,10 @@ function App() {
 
   }, [tasks]);
 
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter((task) => task.completed).length;
+  const remainingTasks = totalTasks - completedTasks;
+
 
 
   return (
@@ -47,6 +51,15 @@ function App() {
       />
 
       <button onClick={AddTask}>Add Task</button>
+
+      <div className="stats">
+
+        <p>📋 Total Tasks:{totalTasks}</p>
+        <p>✅ Completed:{completedTasks} </p>
+        <p>⏳ Remaining:{remainingTasks} </p>
+
+      </div>
+
       <ul>
         {tasks.map((task, index) => (
           <li key={index}>
