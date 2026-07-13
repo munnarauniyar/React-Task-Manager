@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./App.css";
 
@@ -22,9 +22,15 @@ function App() {
     setInput("");
   }
 
+  useEffect(() => {
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  }, [tasks]);
+
 
   return (
-    <>
+    <div className="container">
       <h1>Task Manager</h1>
       <input
         type="text"
@@ -62,7 +68,7 @@ function App() {
           </li>
         ))}
       </ul >
-    </>
+    </div>
 
   )
 
