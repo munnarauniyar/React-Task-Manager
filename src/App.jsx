@@ -5,7 +5,14 @@ import "./App.css";
 function App() {
 
   const [input, setInput] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+
+    const saveTasks = localStorage.getItem("tasks");
+
+    return saveTasks ? JSON.parse(saveTasks) : [];
+
+
+  });
 
   function AddTask() {
     if (input.trim() === "")
@@ -27,6 +34,7 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
   }, [tasks]);
+
 
 
   return (
