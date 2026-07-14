@@ -14,7 +14,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #000000, #000000);
+    background: linear-gradient(135deg, #000000, #050202);
 }
 
 .container {
@@ -33,4 +33,13 @@ h1 {
     margin-bottom: 20px;
     text-align: center;
     font-weight: 700;
+}
+
+button {
+    color: aliceblue;
+    background-color: #000000;
+    padding: 10px;
+    border: none;
+    margin: 3px;
+    border-radius: 13px;
 }

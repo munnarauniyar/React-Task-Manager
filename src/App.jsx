@@ -17,6 +17,8 @@ function App() {
   const [editIndex, setEditIndex] = useState(null);
   const [editText, setEditText] = useState("");
 
+  const [searchText, setSearchText] = useState("");
+
   function addTask() {
     if (input.trim() === "")
       return;
@@ -43,6 +45,13 @@ function App() {
   const remainingTasks = totalTasks - completedTasks;
 
 
+  const filteredTasks = tasks.filter((task) => {
+
+
+
+  });
+
+
 
   return (
     <div className="container">
@@ -51,9 +60,21 @@ function App() {
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            addTask();
+          }
+        }}
       />
 
       <button onClick={addTask}>Add Task</button>
+
+      <p>Search 🔍</p>
+      <input
+        type="text"
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
 
       <div className="stats">
 
