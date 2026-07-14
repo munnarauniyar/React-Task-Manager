@@ -14,7 +14,10 @@ function App() {
 
   });
 
-  function AddTask() {
+  const [editIndex, setEditIndex] = useState(null);
+  const [editText, setEditText] = useState("");
+
+  function addTask() {
     if (input.trim() === "")
       return;
 
@@ -50,7 +53,7 @@ function App() {
         onChange={(e) => setInput(e.target.value)}
       />
 
-      <button onClick={AddTask}>Add Task</button>
+      <button onClick={addTask}>Add Task</button>
 
       <div className="stats">
 
@@ -64,8 +67,8 @@ function App() {
 
         ?
 
-        <div>
-          <p>📭 No tasks yet.</p>
+        <div className="empty">
+          <h3>📭 No tasks yet.</h3>
           <p>Add your first task!</p>
         </div>
 
@@ -73,13 +76,58 @@ function App() {
         <ul>
           {tasks.map((task, index) => (
             <li key={index}>
-              <span className={task.completed ? "completed" : ""}>
-                {task.text}
-              </span>
+              {
+                editIndex === index
+
+                  ?
+
+                  <input
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                  />
+                  :
+                  <span className={task.completed ? "completed" : ""}>
+                    {task.text}
+                  </span>
+
+              }
 
               <button onClick={
                 () => setTasks(tasks.filter((item, i) => i !== index))
               }>Delete</button>
+
+
+              <button onClick={() => {
+                if (editIndex === index) {
+                  //save
+
+                  setTasks(tasks.map((task, i) => {
+
+                    if (i === index) {
+                      return {
+                        ...task,
+                        text: editText
+                      }
+                    }
+                    return task;
+                  })
+
+                  );
+
+                  setEditIndex(null);
+                  setEditText("");
+
+                }
+                else {
+                  //edit
+                  setEditIndex(index);
+                  setEditText(task.text);
+                }
+              }
+              }
+
+              >{editIndex === index ? "Save" : "Edit"}
+              </button>
 
 
               <button onClick={() =>
@@ -94,7 +142,7 @@ function App() {
                 }
                 ))
               }>
-                {task.completed ? "completed" : "complete"}
+                {task.completed ? "Completed" : "Complete"}
               </button>
             </li>
           ))}
