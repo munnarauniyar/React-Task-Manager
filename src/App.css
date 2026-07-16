@@ -29,6 +29,7 @@ body {
     width: min(900px, 100%);
     max-width: 900px;
     min-height: 90dvh;
+    border-radius: 30px;
     padding: 25px;
     background: rgba(255, 255, 255, .12);
     backdrop-filter: blur(25px);
