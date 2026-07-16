@@ -10,7 +10,7 @@
 
 body {
     margin: 0;
-    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,9 +29,6 @@ body {
     width: min(900px, 100%);
     max-width: 900px;
     min-height: 90dvh;
-    max-height: 90dvh;
-    height: auto;
-    border-radius: 30px;
     padding: 25px;
     background: rgba(255, 255, 255, .12);
     backdrop-filter: blur(25px);
