@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
 
+
 }
 
 body {
@@ -15,13 +16,17 @@ body {
     align-items: center;
     font-family: Poppins, sans-serif;
     background: linear-gradient(135deg, #6C63FF, #7B68EE, #8EC5FC);
-    padding: 20px;
+}
+
+#root {
     width: 100%;
-    overflow-x: hidden;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .container {
-    width: 95%;
+    width: min(900px, 100%);
     max-width: 900px;
     min-height: 90vh;
     height: 90vh;
@@ -87,7 +92,7 @@ h1 {
     box-shadow: 0 0 15px rgba(255, 255, 255, .3);
 }
 
-.li input:focus {
+li input:focus {
     border: 1px solid white;
     box-shadow: 0 0 15px rgba(255, 255, 255, .3);
 }
@@ -312,4 +317,20 @@ button:hover {
         flex: 1;
     }
 
+}
+
+.container {
+    animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
 }
