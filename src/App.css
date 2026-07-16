@@ -19,8 +19,9 @@ body {
 }
 
 .container {
-    width: 95vw;
-    max-width: 430px;
+    width: 100%;
+    max-width: 900px;
+    min-height: 90vh;
     height: 90vh;
     border-radius: 30px;
     padding: 25px;
