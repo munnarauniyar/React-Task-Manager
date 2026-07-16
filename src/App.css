@@ -16,6 +16,8 @@ body {
     font-family: Poppins, sans-serif;
     background: linear-gradient(135deg, #6C63FF, #7B68EE, #8EC5FC);
     padding: 20px;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .container {
