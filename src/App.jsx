@@ -14,7 +14,7 @@ function App() {
 
   });
 
-  const [editIndex, setEditIndex] = useState(null);
+  const [editId, setEditId] = useState(null);
   const [editText, setEditText] = useState("");
 
   const [searchText, setSearchText] = useState("");
@@ -26,8 +26,9 @@ function App() {
     setTasks([
       ...tasks,
       {
-        text: input,
-        completed: false
+        text: input.trim(),
+        completed: false,
+        id: Date.now()
       }
 
     ])
@@ -47,30 +48,53 @@ function App() {
 
   const filteredTasks = tasks.filter((task) => {
 
-
+    return task.text.toLowerCase().includes(searchText.toLowerCase());
 
   });
 
+
+  function saveTask() {
+    setTasks(
+      tasks.map((item) => {
+        if (editId === item.id) {
+          return {
+            ...item,
+            text: editText,
+          };
+        }
+        return item;
+      })
+    );
+
+    setEditId(null);
+    setEditText("");
+  }
 
 
   return (
     <div className="container">
       <h1>Task Manager</h1>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            addTask();
-          }
-        }}
-      />
+      <div className="add-task">
+        <input
+          type="text"
+          placeholder="Add a new task..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              addTask();
+            }
+          }}
+        />
 
-      <button onClick={addTask}>Add Task</button>
+        <button onClick={addTask}>Add Task</button>
 
-      <p>Search 🔍</p>
+      </div>
+
+
       <input
+        className="search"
+        placeholder="🔍 search task..."
         type="text"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
@@ -78,9 +102,26 @@ function App() {
 
       <div className="stats">
 
-        <p>📋 Total Tasks:{totalTasks}</p>
-        <p>✅ Completed:{completedTasks} </p>
-        <p>⏳ Remaining:{remainingTasks} </p>
+        <div className="card">
+          <p>📋<br />Total Tasks:</p>
+          <h2>{totalTasks}</h2>
+          <p>Total</p>
+
+        </div>
+
+        <div className="card">
+          <p>✅ <br />Completed:</p>
+          <h2>{completedTasks}</h2>
+          <p>Completed</p>
+        </div>
+
+        <div className="card">
+
+          <p>⏳<br /> Remaining:</p>
+          <h2>{remainingTasks}</h2>
+          <p>Remaining</p>
+
+        </div>
 
       </div>
 
@@ -94,17 +135,25 @@ function App() {
         </div>
 
         :
+
         <ul>
-          {tasks.map((task, index) => (
-            <li key={index}>
+          {filteredTasks.map((task) => (
+            <li key={task.id}>
               {
-                editIndex === index
+                editId === task.id
 
                   ?
 
                   <input
                     value={editText}
                     onChange={(e) => setEditText(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        saveTask();
+                        setEditId(null);
+                        setEditText("");
+                      }
+                    }}
                   />
                   :
                   <span className={task.completed ? "completed" : ""}>
@@ -113,58 +162,57 @@ function App() {
 
               }
 
-              <button onClick={
-                () => setTasks(tasks.filter((item, i) => i !== index))
-              }>Delete</button>
 
 
-              <button onClick={() => {
-                if (editIndex === index) {
-                  //save
+              <div className="actions">
 
-                  setTasks(tasks.map((task, i) => {
+                <button className="delete"
+                  onClick={
+                    () => setTasks(tasks.filter((item) => item.id !== task.id))
+                  }>Delete</button>
 
-                    if (i === index) {
-                      return {
-                        ...task,
-                        text: editText
-                      }
+
+                <button className="edit"
+                  onClick={() => {
+                    if (editId === task.id) {
+                      //save
+
+                      saveTask();
+
+                      setEditId(null);
+                      setEditText("");
+
                     }
-                    return task;
-                  })
-
-                  );
-
-                  setEditIndex(null);
-                  setEditText("");
-
-                }
-                else {
-                  //edit
-                  setEditIndex(index);
-                  setEditText(task.text);
-                }
-              }
-              }
-
-              >{editIndex === index ? "Save" : "Edit"}
-              </button>
-
-
-              <button onClick={() =>
-                setTasks(tasks.map((task, i) => {
-                  if (i === index) {
-                    return {
-                      ...task,
-                      completed: !task.completed
+                    else {
+                      //edit
+                      setEditId(task.id);
+                      setEditText(task.text);
                     }
                   }
-                  return task;
-                }
-                ))
-              }>
-                {task.completed ? "Completed" : "Complete"}
-              </button>
+                  }
+
+
+
+                >{editId === task.id ? "Save" : "Edit"}
+                </button>
+
+
+                <button className="complete"
+                  onClick={() =>
+                    setTasks(tasks.map((item) => {
+                      if (item.id === task.id) {
+                        return {
+                          ...item,
+                          completed: !item.completed
+                        }
+                      }
+                      return item;
+                    }
+                    ))
+                  }>
+                  {task.completed ? "Completed" : "Complete"}
+                </button>
+              </div>
             </li>
           ))}
         </ul >

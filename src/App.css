@@ -1,45 +1,271 @@
-.completed {
-    text-decoration: line-through;
-    opacity: 0.6;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 body {
+    margin: 0;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #000000, #050202);
+    font-family: Poppins, sans-serif;
+    background: linear-gradient(135deg, #6C63FF, #7B68EE, #8EC5FC);
+    padding: 20px;
 }
 
 .container {
-
-    background-color: white;
-    width: 100%;
-    padding: 30px;
-    min-width: 450px;
-    border-radius: 16px;
+    width: 95vw;
+    max-width: 430px;
+    height: 90vh;
+    border-radius: 30px;
+    padding: 25px;
+    background: rgba(255, 255, 255, .12);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, .25);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .15), 0 5px 15px rgba(255, 255, 255, .08) inset;
+    display: flex;
+    flex-direction: column;
 
 }
 
 h1 {
-    color: #333333;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    text-align: center;
+    font-size: 2.2rem;
+    color: white;
     font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.add-task {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.add-task input {
+
+    flex: 1;
+    padding: 15px 18px;
+    border: none;
+    outline: none;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .18);
+    backdrop-filter: blur(15px);
+    color: white;
+    font-size: 16px;
+}
+
+.add-task input::placeholder {
+    color: rgba(255, 255, 255, .7);
+}
+
+.add-task button {
+    padding: 0 22px;
+    border: none;
+    border-radius: 16px;
+    background: white;
+    color: #6C63FF;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.add-task button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .2);
+}
+
+input:focus {
+    border: 1px solid white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, .3);
+}
+
+.search {
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 15px 18px;
+    border: none;
+    outline: none;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .18);
+    backdrop-filter: blur(15px);
+    color: white;
+    font-size: 15px;
+}
+
+.search::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.stats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 1;
+    padding: 18px 12px;
+    border-radius: 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+
+}
+
+.card h2 {
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+.card p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+ul {
+    flex: 1;
+    overflow-y: auto;
+    list-style: none;
+    padding-right: 6px;
+
+}
+
+ul::-webkit-scrollbar {
+    width: 4px;
+}
+
+ul::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .4);
+    border-radius: 20px;
+
+}
+
+li {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px;
+    margin-bottom: 12px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .18);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, .2);
+
+}
+
+li input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, .2);
+    color: white;
+}
+
+li span {
+    flex: 1;
+    color: white;
+    font-size: 16px;
+    word-break: break-word;
+    min-width: 0;
+
+
+}
+
+li input {
+    flex: 1;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 button {
-    color: aliceblue;
-    background-color: #000000;
-    padding: 10px;
     border: none;
-    margin: 3px;
-    border-radius: 13px;
+    border-radius: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    transition: .25s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.delete {
+    background: #ff5f57;
+}
+
+.edit {
+    background: #4f8cff;
+}
+
+.complete {
+    background: #2ecc71;
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: .6;
+}
+
+.empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+@media (max-width:480px) {
+
+    .add-task {
+        display: flex;
+        gap: 12px;
+    }
+
+    .add-task input {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .add-task button {
+        width: 110px;
+        flex-shrink: 0;
+    }
+
+    .actions {
+        margin-top: 10px;
+    }
+
+    li {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .actions button {
+        flex: 1;
+    }
+
 }
