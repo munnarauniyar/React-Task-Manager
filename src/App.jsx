@@ -92,32 +92,37 @@ function App() {
       </div>
 
 
-      <input
-        className="search"
-        placeholder="🔍 search task..."
-        type="text"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
+      <div className="search-box">
+        <i className="bi bi-search"></i>
+        <input
+          className="search"
+          placeholder="search task..."
+          type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+
+      </div>
 
       <div className="stats">
 
         <div className="card">
-          <p>📋<br />Total Tasks:</p>
+
+          <i className="bi bi-list-check"></i>
           <h2>{totalTasks}</h2>
           <p>Total</p>
 
         </div>
 
         <div className="card">
-          <p>✅ <br />Completed:</p>
+
+          <i className="bi bi-check2-circle"></i>
           <h2>{completedTasks}</h2>
           <p>Completed</p>
         </div>
 
         <div className="card">
-
-          <p>⏳<br /> Remaining:</p>
+          <i className="bi bi-hourglass-split"></i>
           <h2>{remainingTasks}</h2>
           <p>Remaining</p>
 
@@ -130,8 +135,11 @@ function App() {
         ?
 
         <div className="empty">
-          <h3>📭 No tasks yet.</h3>
-          <p>Add your first task!</p>
+          <i className="bi bi-inbox"></i>
+
+          <h3>No Tasks Yet</h3>
+
+          <p>Add your first task</p>
         </div>
 
         :
@@ -169,7 +177,7 @@ function App() {
                 <button className="delete"
                   onClick={
                     () => setTasks(tasks.filter((item) => item.id !== task.id))
-                  }>Delete</button>
+                  }><i className="bi bi-trash"></i></button>
 
 
                 <button className="edit"
@@ -193,7 +201,7 @@ function App() {
 
 
 
-                >{editId === task.id ? "Save" : "Edit"}
+                >{editId === task.id ? <i className="bi bi-check-lg"></i> : <i className="bi bi-pencil"></i>}
                 </button>
 
 
@@ -210,7 +218,7 @@ function App() {
                     }
                     ))
                   }>
-                  {task.completed ? "Completed" : "Complete"}
+                  {task.completed ? <i className="bi bi-check-lg"></i> : <i className="bi bi-check-circle-fill"></i>}
                 </button>
               </div>
             </li>

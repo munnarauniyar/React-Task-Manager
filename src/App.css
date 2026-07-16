@@ -22,7 +22,7 @@ body {
     width: 100%;
     max-width: 900px;
     min-height: 90vh;
-    height: 110vh;
+    height: 90vh;
     border-radius: 30px;
     padding: 25px;
     background: rgba(255, 255, 255, .12);
@@ -80,26 +80,47 @@ h1 {
     box-shadow: 0 8px 20px rgba(0, 0, 0, .2);
 }
 
-input:focus {
+.add-task input:focus {
     border: 1px solid white;
     box-shadow: 0 0 15px rgba(255, 255, 255, .3);
 }
 
-.search {
+.li input:focus {
+    border: 1px solid white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, .3);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 18px;
     margin-bottom: 20px;
-    width: 100%;
-    padding: 15px 18px;
-    border: none;
-    outline: none;
-    border-radius: 16px;
     background: rgba(255, 255, 255, .18);
     backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 16px;
+}
+
+.search-box i {
+    color: rgba(255, 255, 255, .8);
+    font-size: 18px;
+
+}
+
+
+.search {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
     color: white;
     font-size: 15px;
+    padding: 15px 0;
 }
 
 .search::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, .7);
 }
 
 .stats {
@@ -109,6 +130,11 @@ input:focus {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
     flex: 1;
     padding: 10px 12px;
     border-radius: 20px;
@@ -126,13 +152,24 @@ input:focus {
 }
 
 .card h2 {
-    font-size: 30px;
-    margin: 10px 0;
+    font-size: 2rem;
+    margin: 0;
 }
 
 .card p {
     font-size: 14px;
     opacity: 0.9;
+}
+
+.card span {
+    font-size: .9rem;
+    opacity: .8;
+}
+
+.card i {
+    font-size: 26px;
+    color: white;
+    margin-bottom: 12px;
 }
 
 ul {
@@ -230,13 +267,17 @@ button:hover {
 }
 
 .empty {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+    justify-content: center;
+    gap: 10px;
     color: white;
+}
+
+.empty i {
+    font-size: 60px;
+    opacity: .8;
 }
 
 @media (max-width:480px) {
